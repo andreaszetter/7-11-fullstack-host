@@ -1,0 +1,24 @@
+{
+  "name": "7-11-fullstack",
+  "version": "1.0.0",
+  "description": "The initial repo for fullstack devs",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/7-eleven-development/7-11-fullstack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/7-eleven-development/7-11-fullstack/issues"
+  },
+  "homepage": "https://github.com/7-eleven-development/7-11-fullstack#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

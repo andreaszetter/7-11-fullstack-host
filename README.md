@@ -48,6 +48,3 @@ Trigger Flow:
 
     Example: Save the data, send a warning, or log it.
 
-# Event Design
-![Screenshot 2025-04-11 141830](https://github.com/user-attachments/assets/2a101932-f993-4d96-b810-540c12b1c72f)
-

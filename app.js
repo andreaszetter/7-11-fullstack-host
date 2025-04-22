@@ -9,18 +9,6 @@ import tempRoute from "./api/routes/tempSensor.js";
 
 //! Code
 const app = express();
-
-app.get("/", (req, res) => {
-  res.status(200).send("Hello, World!");
-});
-
-app.use(express.json());
-app.use("/api/airQuality", airQualityRoute);
-app.use("/api/movement", movementRoute);
-app.use("/api/pulse", pulseRoute);
-app.use("/api/sound", soundRoute);
-app.use("/api/temp", tempRoute);
-
 app.use((req, res, next) => {
   const error = new Error("not found");
   error.status = 404;
@@ -33,5 +21,15 @@ app.use((error, req, res, next) => {
       message: error.message,
     },
   });
+  app.get("/", (req, res) => {
+    res.status(200).send("Hello, World!");
+  });
+
+  app.use(express.json());
+  app.use("/api/airQuality", airQualityRoute);
+  app.use("/api/movement", movementRoute);
+  app.use("/api/pulse", pulseRoute);
+  app.use("/api/sound", soundRoute);
+  app.use("/api/temp", tempRoute);
 });
 export default app;

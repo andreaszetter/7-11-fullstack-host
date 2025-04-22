@@ -13,14 +13,21 @@ router.post("/", (req, res, next) => {
   });
 });
 
-router.get("/sensorId", (req, res, next) => {
+router.get("/sensorId/:id", (req, res, next) => {
   res.status(200).json({
-    message: "order details on the id",
+    message: "Store data from sensor",
     sensorId: req.params.sensorId,
   });
 });
 
-router.delete("/sensorId", (req, res, next) => {
+router.patch("(sensorId/:id", (req, res, next) => {
+  res.status(200).json({
+    message: "patch the sensor",
+    sensorId: req.params.sensorId,
+  });
+});
+
+router.delete("/sensorId/:id", (req, res, next) => {
   res.status(200).json({
     message: "Order DELETED",
     sensorId: req.params.sensorId,

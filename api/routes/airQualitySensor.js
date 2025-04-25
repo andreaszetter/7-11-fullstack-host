@@ -1,36 +1,34 @@
 import express from "express";
 const router = express.Router();
-
-router.get("/", (req, res, next) => {
+const airValues = [
+  {
+    id : new Date().toISOString(),
+    smoke : "float",
+    propane : "float",
+    co2 : "float"
+  }
+]
+router.get("/", (req, res ) => {
   res.status(200).json({
-    message: "orders were fetched",
+    message: "values were fetched",
+    value : airValues
   });
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", (req, res) => {
+  const { smoke,propane,co2 } = req.body; 
+  const responseData = {
+    id: new Date().toISOString(),
+    smoke,
+    propane,
+    co2
+  };
+
   res.status(201).json({
-    message: "order was created",
+    message: "values recieved",
+    data: responseData 
   });
+  airValues.push(responseData)
 });
 
-router.get("/sensorId/:id", (req, res, next) => {
-  res.status(200).json({
-    message: "Store data from sensor",
-    sensorId: req.params.sensorId,
-  });
-});
-
-router.patch("(sensorId/:id", (req, res, next) => {
-  res.status(200).json({
-    message: "patch the sensor",
-    sensorId: req.params.sensorId,
-  });
-});
-
-router.delete("/sensorId/:id", (req, res, next) => {
-  res.status(200).json({
-    message: "Order DELETED",
-    sensorId: req.params.sensorId,
-  });
-});
 export default router;

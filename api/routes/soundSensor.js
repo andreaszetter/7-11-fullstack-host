@@ -1,29 +1,30 @@
 import express from "express";
 const router = express.Router();
-
-router.get("/", (req, res, next) => {
+const soundValues = [
+  {
+    id : new Date().toISOString(),
+    soundLevel : "float"
+  }
+]
+router.get("/", (req, res ) => {
   res.status(200).json({
-    message: "orders were fetched",
+    message: "values were fetched",
+    value : soundValues
   });
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", (req, res) => {
+  const { soundLevel } = req.body; 
+  const responseData = {
+    id: new Date().toISOString(),
+    soundLevel : "float"
+  };
+
   res.status(201).json({
-    message: "order was created",
+    message: "values recieved",
+    data: responseData 
   });
+  soundValues.push(responseData)
 });
 
-router.get("/:sensorId", (req, res, next) => {
-  res.status(200).json({
-    message: "order details on the id",
-    sensorId: req.params.sensorId,
-  });
-});
-
-router.delete("/:sensorId", (req, res, next) => {
-  res.status(200).json({
-    message: "Order DELETED",
-    sensorId: req.params.sensorId,
-  });
-});
 export default router;

@@ -1,0 +1,15 @@
+[2025-04-25T10:22:08.085Z] Error: TEST ERROR
+    at file:///C:/Users/Frank/Documents/GitHub/7-11-fullstack/api/routes/testErrorRoute.js:5:11
+    at Layer.handleRequest (C:\Users\Frank\Documents\GitHub\7-11-fullstack\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Frank\Documents\GitHub\7-11-fullstack\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Frank\Documents\GitHub\7-11-fullstack\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Frank\Documents\GitHub\7-11-fullstack\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Frank\Documents\GitHub\7-11-fullstack\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Frank\Documents\GitHub\7-11-fullstack\node_modules\router\index.js:295:15
+    at processParams (C:\Users\Frank\Documents\GitHub\7-11-fullstack\node_modules\router\index.js:582:12)
+    at next (C:\Users\Frank\Documents\GitHub\7-11-fullstack\node_modules\router\index.js:291:5)
+    at Function.handle (C:\Users\Frank\Documents\GitHub\7-11-fullstack\node_modules\router\index.js:186:3) 
+[2025-04-25T10:23:54.932Z] TEST ERROR 
+[2025-04-25T10:23:55.703Z] TEST ERROR 
+{"timeStamp":"2025-04-25T10:29:37.939Z","method":"GET","url":"/error","message":"TEST ERROR","status":500}
+{"timeStamp":"2025-04-25T10:29:38.976Z","method":"GET","url":"/error","message":"TEST ERROR","status":500}

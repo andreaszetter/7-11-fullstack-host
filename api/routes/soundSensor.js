@@ -1,30 +1,20 @@
 import express from "express";
 const router = express.Router();
-const soundValues = [
+const soundLevel = [
   {
     id : new Date().toISOString(),
     soundLevel : "float"
   }
 ]
-router.get("/", (req, res ) => {
-  res.status(200).json({
-    message: "values were fetched",
-    value : soundValues
-  });
+router.get("/", async (req, res ) => {
+  const result = await req.pool.query("SELECT * FROM soundLevel;");
+  res.json(result.rows);
 });
 
-router.post("/", (req, res) => {
-  const { soundLevel } = req.body; 
-  const responseData = {
-    id: new Date().toISOString(),
-    soundLevel : "float"
-  };
-
-  res.status(201).json({
-    message: "values recieved",
-    data: responseData 
-  });
-  soundValues.push(responseData)
+router.post("/", async (req, res) => {
+  const { sound} = req.body;
+  const result = await req.pool.query("INSERT INTO soundLevel (sound) VALUES ($1) RETURNING *;", [sound]);
+  res.status(201).json(result.rows[0]);
 });
 
 export default router;

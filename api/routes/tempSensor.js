@@ -6,25 +6,15 @@ const temperatureValues = [
     temperature : "float"
   }
 ]
-router.get("/", (req, res ) => {
-  res.status(200).json({
-    message: "values were fetched",
-    value : temperatureValues
-  });
+router.get("/", async (req, res ) => {
+  const result = await req.pool.query("SELECT * FROM temperature;");
+  res.json(result.rows);
 });
 
-router.post("/", (req, res) => {
-  const { temperature } = req.body; 
-  const responseData = {
-    id: new Date().toISOString(),
-    temperature : "float"
-  };
-
-  res.status(201).json({
-    message: "values recieved",
-    data: responseData 
-  });
-  temperatureValues.push(responseData)
+router.post("/", async (req, res) => {
+  const { smoke,propane,co2 } = req.body;
+  const result = await req.pool.query("INSERT INTO temperature (temperature) VALUES ($1) RETURNING *;", [temperature]);
+  res.status(201).json(result.rows[0]);
 });
 
 export default router;

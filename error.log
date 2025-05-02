@@ -13,3 +13,9 @@
 [2025-04-25T10:23:55.703Z] TEST ERROR 
 {"timeStamp":"2025-04-25T10:29:37.939Z","method":"GET","url":"/error","message":"TEST ERROR","status":500}
 {"timeStamp":"2025-04-25T10:29:38.976Z","method":"GET","url":"/error","message":"TEST ERROR","status":500}
+{"timeStamp":"2025-05-02T08:53:52.290Z","method":"GET","url":"/api/airQuality","message":"pool is not defined","status":500}
+{"timeStamp":"2025-05-02T08:56:41.137Z","method":"GET","url":"/api/airQuality","message":"pool is not defined","status":500}
+{"timeStamp":"2025-05-02T08:57:34.180Z","method":"GET","url":"/api/airQuality","message":"pool is not defined","status":500}
+{"timeStamp":"2025-05-02T08:59:46.808Z","method":"GET","url":"/api/airQuality","message":"pool is not defined","status":500}
+{"timeStamp":"2025-05-02T09:02:00.070Z","method":"POST","url":"/api/airQuality","message":"syntax error at or near \"VALUE\"","status":500}
+{"timeStamp":"2025-05-02T09:02:46.190Z","method":"POST","url":"/api/airQuality","message":"duplicate key value violates unique constraint \"airquality_pkey\"","status":500}

@@ -7,26 +7,15 @@ const gpsValues = [
     longtitude: "float"
   }
 ]
-router.get("/", (req, res ) => {
-  res.status(200).json({
-    message: "values were fetched",
-    value : gpsValues
-  });
+router.get("/", async (req, res ) => {
+  const result = await req.pool.query("SELECT * FROM position;");
+  res.json(result.rows);
 });
 
-router.post("/", (req, res) => {
-  const { latitude,longtitude } = req.body; 
-  const responseData = {
-    id: new Date().toISOString(),
-    latitude,
-    longtitude
-  };
-
-  res.status(201).json({
-    message: "values recieved",
-    data: responseData 
-  });
-  gpsValues.push(responseData)
+router.post("/", async (req, res) => {
+  const { latitude,longtitude } = req.body;
+  const result = await req.pool.query("INSERT INTO position (latitude,longtitude) VALUES ($1, $2) RETURNING *;", [latitude, longtitude]);
+  res.status(201).json(result.rows[0]);
 });
 
 export default router;

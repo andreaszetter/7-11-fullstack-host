@@ -4,6 +4,14 @@ This project is a backend REST API for sensor data collection, built using **Nod
 
 ---
 
+## 😎 Developers
+
+Sebastian Ritschewald
+Andreas Zetterlund
+Frank Norqvist
+
+---
+
 ## 📁 Project Structure
 
 ```

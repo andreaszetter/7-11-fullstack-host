@@ -2,35 +2,26 @@
  * @swagger
  * tags:
  *   name: Pulse
- *   description: Pulse monitoring
+ *   description: Pulse sensor monitoring
  */
 
 /**
  * @swagger
  * /pulse:
  *   get:
- *     summary: Fetch all pulse data
+ *     summary: Get all pulse records
  *     tags: [Pulse]
  *     responses:
  *       200:
- *         description: Successful response
+ *         description: List of all pulse readings
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 type: object
- *                 properties:
- *                   device_id:
- *                     type: string
- *                   pulse:
- *                     type: integer
- *                   created_at:
- *                     type: string
- *                     format: date-time
-
+ *                 $ref: '#/components/schemas/Pulse'
  *   post:
- *     summary: Create pulse data
+ *     summary: Add a new pulse record
  *     tags: [Pulse]
  *     requestBody:
  *       required: true
@@ -38,42 +29,37 @@
  *         application/json:
  *           schema:
  *             type: object
+ *             required: [device_id, pulse]
  *             properties:
  *               device_id:
  *                 type: string
  *               pulse:
  *                 type: integer
- *                 example: 75
  *     responses:
  *       201:
- *         description: Data created successfully
+ *         description: Created pulse record
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 device_id:
- *                   type: string
- *                 pulse:
- *                   type: integer
- *                 created_at:
- *                   type: string
- *                   format: date-time
+ *               $ref: '#/components/schemas/Pulse'
+ */
 
+/**
+ * @swagger
  * /pulse/{id}/latest-data:
  *   get:
- *     summary: Get latest pulse data for a specific device
+ *     summary: Get latest pulse data for a device
  *     tags: [Pulse]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Device ID to fetch the latest data
  *         schema:
  *           type: string
+ *         description: Device ID
  *     responses:
  *       200:
- *         description: Successful response with latest data
+ *         description: Latest pulse data
  *         content:
  *           application/json:
  *             schema:
@@ -87,22 +73,25 @@
  *                   type: string
  *                   format: date-time
  *       404:
- *         description: No data found for the specified device
+ *         description: No data found
+ */
 
+/**
+ * @swagger
  * /pulse/{id}/trend:
  *   get:
- *     summary: Get the latest 50 pulse values for a specific device
+ *     summary: Get last 50 pulse readings for a device
  *     tags: [Pulse]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Device ID to fetch the trend data
  *         schema:
  *           type: string
+ *         description: Device ID
  *     responses:
  *       200:
- *         description: Successful response with trend data
+ *         description: Pulse trend data
  *         content:
  *           application/json:
  *             schema:
@@ -113,13 +102,25 @@
  *                 trend:
  *                   type: array
  *                   items:
- *                     type: object
- *                     properties:
- *                       pulse:
- *                         type: integer
- *                       created_at:
- *                         type: string
- *                         format: date-time
+ *                     $ref: '#/components/schemas/Pulse'
  *       404:
- *         description: No trend data found for the specified device
+ *         description: No trend data found
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Pulse:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         device_id:
+ *           type: string
+ *         pulse:
+ *           type: integer
+ *         created_at:
+ *           type: string
+ *           format: date-time
  */

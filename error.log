@@ -21,3 +21,7 @@
 {"timeStamp":"2025-05-02T09:02:46.190Z","method":"POST","url":"/api/airQuality","message":"duplicate key value violates unique constraint \"airquality_pkey\"","status":500}
 {"timeStamp":"2025-05-13T08:41:33.583Z","method":"GET","url":"/api/airQuality","message":"SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string","status":500}
 {"timeStamp":"2025-05-13T08:42:13.515Z","method":"GET","url":"/api/airQuality","message":"SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string","status":500}
+{"timeStamp":"2025-05-13T09:36:41.583Z","method":"POST","url":"/api/gps","message":"numeric field overflow","status":500}
+{"timeStamp":"2025-05-13T09:36:42.205Z","method":"POST","url":"/api/gps","message":"numeric field overflow","status":500}
+{"timeStamp":"2025-05-13T09:40:01.086Z","method":"POST","url":"/api/pulse","message":"invalid input syntax for type integer: \"12.13\"","status":500}
+{"timeStamp":"2025-05-13T09:41:07.999Z","method":"POST","url":"/api/sound","message":"invalid input syntax for type integer: \"14.2\"","status":500}

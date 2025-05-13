@@ -2,39 +2,26 @@
  * @swagger
  * tags:
  *   name: AirQuality
- *   description: Air Quality monitoring
+ *   description: Air quality sensor data
  */
 
 /**
  * @swagger
  * /airquality:
  *   get:
- *     summary: Fetch all air quality data
+ *     summary: Get all air quality sensor entries
  *     tags: [AirQuality]
  *     responses:
  *       200:
- *         description: Successful response
+ *         description: List of all air quality readings
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 type: object
- *                 properties:
- *                   device_id:
- *                     type: string
- *                   smoke:
- *                     type: string
- *                   propane:
- *                     type: string
- *                   co2:
- *                     type: string
- *                   created_at:
- *                     type: string
- *                     format: date-time
-
+ *                 $ref: '#/components/schemas/AirQuality'
  *   post:
- *     summary: Create air quality data
+ *     summary: Add a new air quality reading
  *     tags: [AirQuality]
  *     requestBody:
  *       required: true
@@ -42,49 +29,41 @@
  *         application/json:
  *           schema:
  *             type: object
+ *             required: [device_id, smoke, propane, co2]
  *             properties:
  *               device_id:
  *                 type: string
  *               smoke:
- *                 type: string
+ *                 type: number
  *               propane:
- *                 type: string
+ *                 type: number
  *               co2:
- *                 type: string
+ *                 type: number
  *     responses:
  *       201:
- *         description: Data created successfully
+ *         description: Created air quality record
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 device_id:
- *                   type: string
- *                 smoke:
- *                   type: string
- *                 propane:
- *                   type: string
- *                 co2:
- *                   type: string
- *                 created_at:
- *                   type: string
- *                   format: date-time
+ *               $ref: '#/components/schemas/AirQuality'
+ */
 
- * /airquality/{id}/latest-data:
+/**
+ * @swagger
+ * /airQuality/{id}/latest-data:
  *   get:
- *     summary: Get latest sensor data for a specific device
+ *     summary: Get latest air quality values for a device
  *     tags: [AirQuality]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Device ID to fetch the latest data
  *         schema:
  *           type: string
+ *         description: Device ID
  *     responses:
  *       200:
- *         description: Successful response with latest data
+ *         description: Latest air quality data
  *         content:
  *           application/json:
  *             schema:
@@ -93,31 +72,34 @@
  *                 device_id:
  *                   type: string
  *                 latest_smoke:
- *                   type: string
+ *                   type: number
  *                 latest_propane:
- *                   type: string
+ *                   type: number
  *                 latest_co2:
- *                   type: string
+ *                   type: number
  *                 latest_timestamp:
  *                   type: string
  *                   format: date-time
  *       404:
- *         description: No data found for the specified device
+ *         description: No data found
+ */
 
- * /airquality/{id}/trend:
+/**
+ * @swagger
+ * /airQuality/{id}/trend:
  *   get:
- *     summary: Get the latest 50 sensor values for a specific device
+ *     summary: Get last 50 air quality readings for a device
  *     tags: [AirQuality]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Device ID to fetch the trend data
  *         schema:
  *           type: string
+ *         description: Device ID
  *     responses:
  *       200:
- *         description: Successful response with trend data
+ *         description: List of air quality readings
  *         content:
  *           application/json:
  *             schema:
@@ -128,17 +110,29 @@
  *                 trend:
  *                   type: array
  *                   items:
- *                     type: object
- *                     properties:
- *                       smoke:
- *                         type: string
- *                       propane:
- *                         type: string
- *                       co2:
- *                         type: string
- *                       created_at:
- *                         type: string
- *                         format: date-time
+ *                     $ref: '#/components/schemas/AirQuality'
  *       404:
- *         description: No trend data found for the specified device
+ *         description: No trend data found
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     AirQuality:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         device_id:
+ *           type: string
+ *         smoke:
+ *           type: number
+ *         propane:
+ *           type: number
+ *         co2:
+ *           type: number
+ *         created_at:
+ *           type: string
+ *           format: date-time
  */

@@ -62,3 +62,9 @@
 {"timeStamp":"2025-05-13T14:29:54.062Z","method":"GET","url":"/api/airquality/device1/trend","message":"more than one row returned by a subquery used as an expression","status":500}
 {"timeStamp":"2025-05-13T14:34:29.924Z","method":"GET","url":"/api/device/device1/trend","message":"column \"temperature\" does not exist","status":500}
 {"timeStamp":"2025-05-13T14:36:05.383Z","method":"GET","url":"/api/device/device1/trend","message":"column reference \"created_at\" is ambiguous","status":500}
+{"timeStamp":"2025-05-13T15:06:48.539Z","method":"POST","url":"/api/airquality","message":"column \"device_id\" of relation \"airquality\" does not exist","status":500}
+{"timeStamp":"2025-05-13T15:06:51.856Z","method":"POST","url":"/api/airquality","message":"column \"device_id\" of relation \"airquality\" does not exist","status":500}
+{"timeStamp":"2025-05-13T15:06:53.083Z","method":"POST","url":"/api/airquality","message":"column \"device_id\" of relation \"airquality\" does not exist","status":500}
+{"timeStamp":"2025-05-13T15:06:59.770Z","method":"POST","url":"/api/airquality","message":"column \"device_id\" of relation \"airquality\" does not exist","status":500}
+{"timeStamp":"2025-05-13T15:07:12.544Z","method":"GET","url":"/api/airQuality/device1/latest-data","message":"column \"device_id\" does not exist","status":500}
+{"timeStamp":"2025-05-13T15:07:13.801Z","method":"GET","url":"/api/airQuality/device1/latest-data","message":"column \"device_id\" does not exist","status":500}

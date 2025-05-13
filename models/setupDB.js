@@ -3,99 +3,101 @@ import pool from "./db.js";
 
 export async function setupTables() {
   const createTablesQuery = `
-    CREATE TABLE "device" (
-  "id" SERIAL PRIMARY KEY,
-  "device" VARCHAR(30),
-  "airquality_id" INT,
-  "temperature_id" INT,
-  "soundlevel_id" INT,
-  "position_id" INT,
-  "pulse_id" INT
-);
+    -- Main tables
+    CREATE TABLE IF NOT EXISTS "company" (
+      "id" SERIAL PRIMARY KEY,
+      "company_name" TEXT
+    );
 
-CREATE TABLE "admin" (
-  "id" SERIAL PRIMARY KEY,
-  "company_id" INT,
-  "firstname" VARCHAR(50),
-  "surname" VARCHAR(50),
-  "password_hash" VARCHAR(255),
-  "email" VARCHAR(100) UNIQUE,
-  "phonenumber" INTEGER UNIQUE,
-  "users_id" INT
-);
+    CREATE TABLE IF NOT EXISTS "device" (
+      "id" VARCHAR(150) PRIMARY KEY
+    );
 
-CREATE TABLE "company" (
-  "id" SERIAL PRIMARY KEY,
-  "company_name" TEXT
-);
+    CREATE TABLE IF NOT EXISTS "users" (
+      "id" SERIAL PRIMARY KEY,
+      "company_id" INT,
+      "firstname" VARCHAR(50),
+      "surname" VARCHAR(50),
+      "password_hash" VARCHAR(255),
+      "email" VARCHAR(100) UNIQUE,
+      "phonenumber" INTEGER UNIQUE,
+      "device_id" VARCHAR(150),
+      "role" TEXT DEFAULT 'user'
+    );
 
-CREATE TABLE "users" (
-  "id" SERIAL PRIMARY KEY,
-  "company_id" INT,
-  "firstname" VARCHAR(50),
-  "surname" VARCHAR(50),
-  "password_hash" VARCHAR(255),
-  "email" VARCHAR(100) UNIQUE,
-  "phonenumber" INTEGER UNIQUE,
-  "device_id" INT
-);
+    CREATE TABLE IF NOT EXISTS "airquality" (
+      "id" SERIAL PRIMARY KEY,
+      "device_id" VARCHAR(150),
+      "smoke" DECIMAL(9,2),
+      "propane" DECIMAL(9,2),
+      "co2" DECIMAL(9,2),
+      "created_at" TIMESTAMP DEFAULT now()
+    );
 
-CREATE TABLE "airquality" (
-  "id" SERIAL PRIMARY KEY,
-  "smoke" DECIMAL(9,2),
-  "propane" DECIMAL(9,2),
-  "co2" DECIMAL(9,2),
-  "created_at" TIMESTAMP DEFAULT (now())
-);
+    CREATE TABLE IF NOT EXISTS "temperature" (
+      "id" SERIAL PRIMARY KEY,
+      "device_id" VARCHAR(150),
+      "temperature" DECIMAL(5,2),
+      "created_at" TIMESTAMP DEFAULT now()
+    );
 
-CREATE TABLE "temperature" (
-  "id" SERIAL PRIMARY KEY,
-  "temperature" DECIMAL(5,2),
-  "created_at" TIMESTAMP DEFAULT (now())
-);
+    CREATE TABLE IF NOT EXISTS "soundlevel" (
+      "id" SERIAL PRIMARY KEY,
+      "device_id" VARCHAR(150),
+      "sound" INT,
+      "created_at" TIMESTAMP DEFAULT now()
+    );
 
-CREATE TABLE "soundlevel" (
-  "id" SERIAL PRIMARY KEY,
-  "sound" INT,
-  "created_at" TIMESTAMP DEFAULT (now())
-);
+    CREATE TABLE IF NOT EXISTS "position" (
+      "id" SERIAL PRIMARY KEY,
+      "device_id" VARCHAR(150),
+      "latitude" DECIMAL(9,6),
+      "longitude" DECIMAL(9,6),
+      "created_at" TIMESTAMP DEFAULT now()
+    );
 
-CREATE TABLE "position" (
-  "id" SERIAL PRIMARY KEY,
-  "latitude" DECIMAL(9,6),
-  "longitude" DECIMAL(9,6),
-  "created_at" TIMESTAMP DEFAULT (now())
-);
+    CREATE TABLE IF NOT EXISTS "pulse" (
+      "id" SERIAL PRIMARY KEY,
+      "device_id" VARCHAR(150),
+      "pulse" INT,
+      "created_at" TIMESTAMP DEFAULT now()
+    );
 
-CREATE TABLE "pulse" (
-  "id" SERIAL PRIMARY KEY,
-  "pulse" INT,
-  "created_at" TIMESTAMP DEFAULT (now())
-);
+    -- Foreign keys (added after all tables are defined)
+    ALTER TABLE "users"
+      ADD CONSTRAINT fk_users_company
+      FOREIGN KEY ("company_id") REFERENCES "company" ("id"),
+      ADD CONSTRAINT fk_users_device
+      FOREIGN KEY ("device_id") REFERENCES "device" ("id");
 
-ALTER TABLE "device" ADD FOREIGN KEY ("airquality_id") REFERENCES "airquality" ("id");
+    ALTER TABLE "airquality"
+      ADD CONSTRAINT fk_airquality_device
+      FOREIGN KEY ("device_id") REFERENCES "device" ("id");
 
-ALTER TABLE "device" ADD FOREIGN KEY ("temperature_id") REFERENCES "temperature" ("id");
+    ALTER TABLE "temperature"
+      ADD CONSTRAINT fk_temperature_device
+      FOREIGN KEY ("device_id") REFERENCES "device" ("id");
 
-ALTER TABLE "device" ADD FOREIGN KEY ("soundlevel_id") REFERENCES "soundlevel" ("id");
+    ALTER TABLE "soundlevel"
+      ADD CONSTRAINT fk_soundlevel_device
+      FOREIGN KEY ("device_id") REFERENCES "device" ("id");
 
-ALTER TABLE "device" ADD FOREIGN KEY ("position_id") REFERENCES "position" ("id");
+    ALTER TABLE "position"
+      ADD CONSTRAINT fk_position_device
+      FOREIGN KEY ("device_id") REFERENCES "device" ("id");
 
-ALTER TABLE "device" ADD FOREIGN KEY ("pulse_id") REFERENCES "pulse" ("id");
-
-ALTER TABLE "admin" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id");
-
-ALTER TABLE "admin" ADD FOREIGN KEY ("users_id") REFERENCES "users" ("id");
-
-ALTER TABLE "users" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id");
-
-ALTER TABLE "users" ADD FOREIGN KEY ("device_id") REFERENCES "device" ("id");
-    `;
+    ALTER TABLE "pulse"
+      ADD CONSTRAINT fk_pulse_device
+      FOREIGN KEY ("device_id") REFERENCES "device" ("id");
+  `;
 
   try {
     await pool.query(createTablesQuery);
-    console.log("✅ Alla tabeller är skapade (om de inte redan fanns).");
+    console.log("✅ Alla tabeller och constraints är skapade.");
   } catch (error) {
-    console.error("❌ Fel vid skapande av tabeller:", error);
+    console.error("❌ Fel vid skapande av tabeller eller constraints:", error.message);
   }
 }
+
+
+export default setupTables;

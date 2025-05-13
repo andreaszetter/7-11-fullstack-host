@@ -9,7 +9,7 @@
  * @swagger
  * /temperature:
  *   get:
- *     summary: Fetch temperature data
+ *     summary: Fetch all temperature data
  *     tags: [Temperature]
  *     responses:
  *       200:
@@ -17,23 +17,18 @@
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: values were fetched
- *                 value:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       id:
- *                         type: string
- *                         format: date-time
- *                       temperature:
- *                         type: string
- *                         example: "25.5"
- *
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   device_id:
+ *                     type: string
+ *                   temperature:
+ *                     type: string
+ *                   created_at:
+ *                     type: string
+ *                     format: date-time
+
  *   post:
  *     summary: Create temperature data
  *     tags: [Temperature]
@@ -44,9 +39,10 @@
  *           schema:
  *             type: object
  *             properties:
+ *               device_id:
+ *                 type: string
  *               temperature:
  *                 type: string
- *                 example: "25.5"
  *     responses:
  *       201:
  *         description: Data created successfully
@@ -55,16 +51,74 @@
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 device_id:
  *                   type: string
- *                   example: values received
- *                 data:
- *                   type: object
- *                   properties:
- *                     id:
- *                       type: string
- *                       format: date-time
- *                     temperature:
- *                       type: string
- *                       example: "25.5"
+ *                 temperature:
+ *                   type: string
+ *                 created_at:
+ *                   type: string
+ *                   format: date-time
+
+ * /temperature/{id}/latest-data:
+ *   get:
+ *     summary: Get latest temperature data for a specific device
+ *     tags: [Temperature]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Device ID to fetch the latest data
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response with latest data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 device_id:
+ *                   type: string
+ *                 latest_temperature:
+ *                   type: string
+ *                 latest_timestamp:
+ *                   type: string
+ *                   format: date-time
+ *       404:
+ *         description: No data found for the specified device
+
+ * /temperature/{id}/trend:
+ *   get:
+ *     summary: Get the latest 50 temperature values for a specific device
+ *     tags: [Temperature]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Device ID to fetch the trend data
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response with trend data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 device_id:
+ *                   type: string
+ *                 trend:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       temperature:
+ *                         type: string
+ *                       created_at:
+ *                         type: string
+ *                         format: date-time
+ *       404:
+ *         description: No trend data found for the specified device
  */

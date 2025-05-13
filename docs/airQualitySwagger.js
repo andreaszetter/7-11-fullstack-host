@@ -7,9 +7,9 @@
 
 /**
  * @swagger
- * /airQuality:
+ * /airquality:
  *   get:
- *     summary: Fetch air quality data
+ *     summary: Fetch all air quality data
  *     tags: [AirQuality]
  *     responses:
  *       200:
@@ -17,28 +17,22 @@
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: values were fetched
- *                 value:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       id:
- *                         type: string
- *                         format: date-time
- *                       pm1:
- *                         type: string
- *                       pm2:
- *                         type: string
- *                       pm10:
- *                         type: string
- *                       tvoc:
- *                         type: string
- *
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   device_id:
+ *                     type: string
+ *                   smoke:
+ *                     type: string
+ *                   propane:
+ *                     type: string
+ *                   co2:
+ *                     type: string
+ *                   created_at:
+ *                     type: string
+ *                     format: date-time
+
  *   post:
  *     summary: Create air quality data
  *     tags: [AirQuality]
@@ -49,13 +43,13 @@
  *           schema:
  *             type: object
  *             properties:
- *               pm1:
+ *               device_id:
  *                 type: string
- *               pm2:
+ *               smoke:
  *                 type: string
- *               pm10:
+ *               propane:
  *                 type: string
- *               tvoc:
+ *               co2:
  *                 type: string
  *     responses:
  *       201:
@@ -65,21 +59,86 @@
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 device_id:
  *                   type: string
- *                   example: values fetched
- *                 data:
- *                   type: object
- *                   properties:
- *                     id:
- *                       type: string
- *                       format: date-time
- *                     pm1:
- *                       type: string
- *                     pm2:
- *                       type: string
- *                     pm10:
- *                       type: string
- *                     tvoc:
- *                       type: string
+ *                 smoke:
+ *                   type: string
+ *                 propane:
+ *                   type: string
+ *                 co2:
+ *                   type: string
+ *                 created_at:
+ *                   type: string
+ *                   format: date-time
+
+ * /airquality/{id}/latest-data:
+ *   get:
+ *     summary: Get latest sensor data for a specific device
+ *     tags: [AirQuality]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Device ID to fetch the latest data
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response with latest data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 device_id:
+ *                   type: string
+ *                 latest_smoke:
+ *                   type: string
+ *                 latest_propane:
+ *                   type: string
+ *                 latest_co2:
+ *                   type: string
+ *                 latest_timestamp:
+ *                   type: string
+ *                   format: date-time
+ *       404:
+ *         description: No data found for the specified device
+
+ * /airquality/{id}/trend:
+ *   get:
+ *     summary: Get the latest 50 sensor values for a specific device
+ *     tags: [AirQuality]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Device ID to fetch the trend data
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response with trend data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 device_id:
+ *                   type: string
+ *                 trend:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       smoke:
+ *                         type: string
+ *                       propane:
+ *                         type: string
+ *                       co2:
+ *                         type: string
+ *                       created_at:
+ *                         type: string
+ *                         format: date-time
+ *       404:
+ *         description: No trend data found for the specified device
  */

@@ -1,19 +1,19 @@
 import express from "express";
-import loggerMiddleware from "./controllers/middleware/logger.js"
-import errorHandler from "./controllers/middleware/errorHandler.js";
-import pool from "./models/db.js";
+import loggerMiddleware from "../../controllers/middleware/logger.js"
+import errorHandler from "../../controllers/middleware/errorHandler.js";
+import pool from "../../models/db.js";
 import jwt from "jsonwebtoken";
 
 //!Routes
-import airQualityRoute from "./api/routes/airQualitySensor.js";
-import gpsRoute from "./api/routes/gpsSensor.js";
-import pulseRoute from "./api/routes/pulseSensor.js";
-import soundRoute from "./api/routes/soundSensor.js";
-import tempRoute from "./api/routes/tempSensor.js";
-import testErrorRoute from "./api/routes/testErrorRoute.js"
-import deviceRoute from "./api/routes/device.js";
-import companyRoute from "./api/routes/company.js"
-import usersRoute from "./api/routes/users.js";
+import airQualityRoute from "./airQualitySensor.js";
+import gpsRoute from "./gpsSensor.js";
+import pulseRoute from "./pulseSensor.js";
+import soundRoute from "./soundSensor.js";
+import tempRoute from "./tempSensor.js";
+import testErrorRoute from "./testErrorRoute.js"
+import deviceRoute from "./device.js";
+import companyRoute from "./company.js"
+import usersRoute from "./users.js";
 
 
 //! Code
@@ -41,4 +41,6 @@ app.use((req, res, next) => {
 
   app.use(errorHandler);
 
-export default app;
+  export default function handler(req, res) {
+    return app(req, res);
+  }

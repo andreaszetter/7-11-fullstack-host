@@ -41,6 +41,4 @@ app.use((req, res, next) => {
 
   app.use(errorHandler);
 
-  export default function handler(req, res) {
-    return app(req, res);
-  }
+  export default app;

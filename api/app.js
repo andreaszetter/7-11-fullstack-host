@@ -1,6 +1,6 @@
 import express from "express";
-import loggerMiddleware from "../controllers/middleware/logger.js"
-import errorHandler from "../controllers/middleware/errorHandler.js";
+//import loggerMiddleware from "../controllers/middleware/logger.js"
+//import errorHandler from "../controllers/middleware/errorHandler.js";
 import pool from "../models/db.js";
 import jwt from "jsonwebtoken";
 

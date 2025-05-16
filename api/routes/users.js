@@ -1,6 +1,5 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import verifyJWT from "../../controllers/middleware/verifyJWT.js";
 import bcrypt from "bcrypt";
 
 const router = express.Router();
@@ -54,14 +53,14 @@ router.post("/login", async (req, res, next) => {
     if(user.role !== "user" && user.role !== "admin"){
       return res.status(401).json({ error: "Unknown account role, contact administrators."});
     }
+
     const token = jwt.sign(
       {
         email: user.email,
         company: user.company_id,
         role: user.role
       },
-      process.env.JWT_SECRET || "yoheybro",
-      { expiresIn: "1h" }
+      process.env.JWT_SECRET, { expiresIn: "1h" }
     );
 
    
@@ -90,7 +89,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.get("/protected", verifyJWT, (req, res) => {
+router.get("/protected", (req, res) => {
 
 })
 

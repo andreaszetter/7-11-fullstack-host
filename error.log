@@ -68,3 +68,7 @@
 {"timeStamp":"2025-05-13T15:06:59.770Z","method":"POST","url":"/api/airquality","message":"column \"device_id\" of relation \"airquality\" does not exist","status":500}
 {"timeStamp":"2025-05-13T15:07:12.544Z","method":"GET","url":"/api/airQuality/device1/latest-data","message":"column \"device_id\" does not exist","status":500}
 {"timeStamp":"2025-05-13T15:07:13.801Z","method":"GET","url":"/api/airQuality/device1/latest-data","message":"column \"device_id\" does not exist","status":500}
+{"timeStamp":"2025-05-16T08:55:40.244Z","method":"POST","url":"/api/users/register","message":"insert or update on table \"users\" violates foreign key constraint \"fk_users_company\"","status":500}
+{"timeStamp":"2025-05-16T08:57:52.838Z","method":"POST","url":"/api/company","message":"Unexpected non-whitespace character after JSON at position 35 (line 4 column 1)","status":400}
+{"timeStamp":"2025-05-16T10:22:58.260Z","method":"POST","url":"/api/users/login","message":"secretOrPrivateKey must have a value","status":500}
+{"timeStamp":"2025-05-16T10:23:52.309Z","method":"POST","url":"/api/users/login","message":"secretOrPrivateKey must have a value","status":500}

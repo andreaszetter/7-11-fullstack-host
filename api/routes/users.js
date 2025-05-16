@@ -25,7 +25,7 @@ router.post("/register", async (req, res, next) => {
     const result = await req.pool.query(
       `INSERT INTO users (company_id, firstname, surname, password_hash, email, phonenumber, device_id, role)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      [company_id, firstname, surname, password_hash, email, phonenumber, device_id, role || 'user']
+      [company_id, firstname, surname, password_hash, email, phonenumber, device_id, role || "user"]
     );
     res.status(201).json({ message: `User registered: ${email}`});
   } catch (err) {
@@ -51,16 +51,40 @@ router.post("/login", async (req, res, next) => {
       return res.status(401).json({ error: "Wrong email or password."});
     }
 
-    // if(user.role==="user"){
+    if(user.role !== "user" && user.role !== "admin"){
+      return res.status(401).json({ error: "Unknown account role, contact administrators."});
+    }
+    const token = jwt.sign(
+      {
+        email: user.email,
+        company: user.company_id,
+        role: user.role
+      },
+      process.env.JWT_SECRET || "yoheybro",
+      { expiresIn: "1h" }
+    );
 
-    // }
+   
+    if (user.role === "admin") {
+    
+      const devicesResult = await req.pool.query(
+        `SELECT DISTINCT device_id FROM users WHERE company_id = $1 AND device_id IS NOT NULL`,
+        [user.company_id]
+      );
 
-    const token = jwt.sign({email: email, device_id: user.device_id }, process.env.JWT_SECRET || "yoheybro", {
-      expiresIn: "1h",
-    });
-
-    res.json({ message: "Login succesful!", token: token, device_id: user.device_id });
-
+      return res.json({
+        message: "Succesfull signin! welcome Admin",
+        token: token,
+        devices: devicesResult.rows
+      });
+    } else {
+      
+      return res.json({
+        message: "Succesfull signin! Welcome User",
+        token: token,
+        device_id: user.device_id
+      });
+    }
   } catch (err) {
     next(err);
   }

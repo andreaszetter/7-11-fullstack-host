@@ -4,6 +4,15 @@ This project is a backend REST API for sensor data collection, built using **Nod
 
 ---
 
+=======
+## 😎 Developers
+
+- Sebastian Ritschewald
+- Andreas Zetterlund
+- Frank Norqvist
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -30,6 +39,7 @@ This project is a backend REST API for sensor data collection, built using **Nod
 
 ### ✅ Prerequisites
 
+=======
 - [Node.js](https://nodejs.org/) (v18+ recommended)
 - npm (comes with Node.js)
 
@@ -63,6 +73,14 @@ Swagger Docs: [http://localhost:8000/api-docs](http://localhost:8000/api-docs)
 | Pulse       | `/api/pulse`      | _Pending_     |
 | Sound       | `/api/sound`      | _Pending_     |
 | Temperature | `/api/temp`       | _Pending_     |
+=======
+| Sensor          | Endpoint              | Methods |
+|-----------------|------------------------|---------|
+| Air Quality     | `/api/airQuality`      | `GET`, `POST` |
+| GPS             | `/api/gps`             | _Pending_ |
+| Pulse           | `/api/pulse`           | _Pending_ |
+| Sound           | `/api/sound`           | _Pending_ |
+| Temperature     | `/api/temp`            | _Pending_ |
 
 Each endpoint supports `GET` for retrieving sensor values and `POST` for submitting new ones (air quality route implemented as example).
 
@@ -110,9 +128,15 @@ It includes visual exploration and interaction with the available API routes.
 
 ## 🧰 Scripts
 
+
 | Command     | Description          |
 | ----------- | -------------------- |
 | `npm start` | Start the API server |
+=======
+| Command      | Description           |
+|--------------|-----------------------|
+| `npm start`  | Start the API server  |
+
 
 ---
 

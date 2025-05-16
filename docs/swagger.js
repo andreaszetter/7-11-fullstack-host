@@ -15,7 +15,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ['./docs/*.js'], // Sökväg till dina Swagger-dokumentationsfiler
+  apis: ['./*.js'], // Sökväg till dina Swagger-dokumentationsfiler
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);

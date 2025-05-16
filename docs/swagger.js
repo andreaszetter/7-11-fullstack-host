@@ -11,7 +11,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:8000/api',
+        url: 'https://chas-challenge.vercel.app/api-docs',
       },
     ],
   },

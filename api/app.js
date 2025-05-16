@@ -19,7 +19,7 @@ import usersRoute from "./routes/users.js";
 //! Code
 const app = express();
 app.use(express.json());
-app.use(loggerMiddleware);
+//app.use(loggerMiddleware);
 app.use((req, res, next) => {
   req.pool = pool;
   next();
@@ -39,6 +39,6 @@ app.use((req, res, next) => {
   app.use("/api/company", companyRoute);
   app.use("/api/users", usersRoute);
 
-  app.use(errorHandler);
+  //app.use(errorHandler);
 
   export default app;

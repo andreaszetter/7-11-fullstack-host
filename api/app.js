@@ -1,19 +1,19 @@
 import express from "express";
-import loggerMiddleware from "../../controllers/middleware/logger.js"
-import errorHandler from "../../controllers/middleware/errorHandler.js";
-import pool from "../../models/db.js";
+import loggerMiddleware from "../controllers/middleware/logger.js"
+import errorHandler from "../controllers/middleware/errorHandler.js";
+import pool from "../models/db.js";
 import jwt from "jsonwebtoken";
 
 //!Routes
-import airQualityRoute from "./airQualitySensor.js";
-import gpsRoute from "./gpsSensor.js";
-import pulseRoute from "./pulseSensor.js";
-import soundRoute from "./soundSensor.js";
-import tempRoute from "./tempSensor.js";
-import testErrorRoute from "./testErrorRoute.js"
-import deviceRoute from "./device.js";
-import companyRoute from "./company.js"
-import usersRoute from "./users.js";
+import airQualityRoute from "./routes/airQualitySensor.js";
+import gpsRoute from "./routes/gpsSensor.js";
+import pulseRoute from "./routes/pulseSensor.js";
+import soundRoute from "./routes/soundSensor.js";
+import tempRoute from "./routes/tempSensor.js";
+import testErrorRoute from "./routes/testErrorRoute.js"
+import deviceRoute from "./routes/device.js";
+import companyRoute from "./routes/company.js"
+import usersRoute from "./routes/users.js";
 
 
 //! Code

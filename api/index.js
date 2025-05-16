@@ -1,6 +1,6 @@
 import app from "./app.js";
-import setupSwagger from "../../docs/swagger.js";
-import setupTables from "../../models/setupDB.js";
+import setupSwagger from "../docs/swagger.js";
+import setupTables from "../models/setupDB.js";
 
 setupSwagger(app);
 

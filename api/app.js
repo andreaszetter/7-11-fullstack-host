@@ -1,5 +1,5 @@
 import express from "express";
-
+import verifyJWT from "../controllers/middleware/verifyJWT.js";
 import pool from "../models/db.js";
 import jwt from "jsonwebtoken";
 

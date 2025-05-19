@@ -1,4 +1,5 @@
 import express from "express";
+import deviceAccessMiddleware from "../../controllers/middleware/deviceAccessMiddleware.js";
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
@@ -12,7 +13,7 @@ router.get("/", async (req, res, next) => {
 
 
 //Get latest sensor value
-router.get("/:id/latest-data", async (req, res, next) => {
+router.get("/:id/latest-data", deviceAccessMiddleware, async (req, res, next) => {
 
   const { id } = req.params;
 
@@ -38,7 +39,7 @@ router.get("/:id/latest-data", async (req, res, next) => {
 });
 
 //Get latest 50 sensor values
-router.get("/:id/trend", async (req, res, next) => {
+router.get("/:id/trend", deviceAccessMiddleware, async (req, res, next) => {
   const { id } = req.params;
 
   try {

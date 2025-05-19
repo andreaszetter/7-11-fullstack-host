@@ -72,14 +72,14 @@ router.post("/login", async (req, res, next) => {
       );
 
       return res.json({
-        message: "Succesfull signin! welcome Admin",
+        message: `Successful signin! Welcome admin ${user.firstname}`,
         token: token,
         devices: devicesResult.rows
       });
     } else {
       
       return res.json({
-        message: "Succesfull signin! Welcome User",
+        message: `Successful signin! Welcome ${user.firstname}`,
         token: token,
         device_id: user.device_id
       });

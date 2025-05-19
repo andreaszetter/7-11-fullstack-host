@@ -33,12 +33,8 @@ app.use((req, res, next) => {
 app.use("/api/users", usersRoute);
 app.use("/error", testErrorRoute)
 
-
 //Using verifyJWT globally to protect all routes ;)
 app.use(verifyJWT);
-
-// const deviceAccessMiddleware = authorizeDeviceAccess(pool);
-// app.use(deviceAccessMiddleware);
 
 app.get("/", (req, res) => {
   res.status(200).send("Hello, World!");

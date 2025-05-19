@@ -42,7 +42,7 @@ router.get("/:id/latest-data", deviceAccessMiddleware, async (req, res, next) =>
 });
 
 //Get latest 50 sensor values
-router.get("/:id/trend", async (req, res, next) => {
+router.get("/:id/trend", deviceAccessMiddleware, async (req, res, next) => {
   const { id } = req.params;
 
   try {

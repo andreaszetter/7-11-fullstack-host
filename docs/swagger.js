@@ -11,11 +11,11 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:8000/api',
+        url: 'https://chas-challenge.vercel.app/api/',
       },
     ],
   },
-  apis: ['./docs/*.js'], // Sökväg till dina Swagger-dokumentationsfiler
+  apis: ['./*.js'], // Sökväg till dina Swagger-dokumentationsfiler
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);

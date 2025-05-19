@@ -1,20 +1,22 @@
 import express from "express";
-import pool from "./models/db.js";
+
+import pool from "../models/db.js";
 import jwt from "jsonwebtoken";
 
 import dotenv from "dotenv";
 dotenv.config();
 
 //!Routes
-import airQualityRoute from "./api/routes/airQualitySensor.js";
-import gpsRoute from "./api/routes/gpsSensor.js";
-import pulseRoute from "./api/routes/pulseSensor.js";
-import soundRoute from "./api/routes/soundSensor.js";
-import tempRoute from "./api/routes/tempSensor.js";
-import testErrorRoute from "./api/routes/testErrorRoute.js"
-import deviceRoute from "./api/routes/device.js";
-import companyRoute from "./api/routes/company.js"
-import usersRoute from "./api/routes/users.js";
+import airQualityRoute from "./routes/airQualitySensor.js";
+import gpsRoute from "./routes/gpsSensor.js";
+import pulseRoute from "./routes/pulseSensor.js";
+import soundRoute from "./routes/soundSensor.js";
+import tempRoute from "./routes/tempSensor.js";
+import testErrorRoute from "./routes/testErrorRoute.js"
+import deviceRoute from "./routes/device.js";
+import companyRoute from "./routes/company.js"
+import usersRoute from "./routes/users.js";
+
 
 
 //! Code
@@ -45,3 +47,4 @@ app.use("/api/company", companyRoute);
 
 
 export default app;
+

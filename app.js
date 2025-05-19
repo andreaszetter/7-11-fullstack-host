@@ -4,6 +4,9 @@ import errorHandler from "./controllers/middleware/errorHandler.js";
 import pool from "./models/db.js";
 import jwt from "jsonwebtoken";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 //!Routes
 import airQualityRoute from "./api/routes/airQualitySensor.js";
 import gpsRoute from "./api/routes/gpsSensor.js";
@@ -25,20 +28,25 @@ app.use((req, res, next) => {
   next();
 });
 
-  app.get("/", (req, res) => {
-    res.status(200).send("Hello, World!");
-  });
+app.use("/api/users", usersRoute);
+app.use("/error", testErrorRoute)
 
-  app.use("/error", testErrorRoute)
-  app.use("/api/airQuality", airQualityRoute);
-  app.use("/api/gps", gpsRoute);
-  app.use("/api/pulse", pulseRoute);
-  app.use("/api/sound", soundRoute);
-  app.use("/api/temp", tempRoute);
-  app.use("/api/device", deviceRoute);
-  app.use("/api/company", companyRoute);
-  app.use("/api/users", usersRoute);
+//Using verifyJWT globally to protect all routes ;)
+app.use(verifyJWT);
 
-  app.use(errorHandler);
+app.get("/", (req, res) => {
+  res.status(200).send("Hello, World!");
+});
+
+app.use("/api/airQuality", airQualityRoute);
+app.use("/api/gps", gpsRoute);
+app.use("/api/pulse", pulseRoute);
+app.use("/api/sound", soundRoute);
+app.use("/api/temp", tempRoute);
+app.use("/api/device", deviceRoute);
+app.use("/api/company", companyRoute);
+
+
+app.use(errorHandler);
 
 export default app;

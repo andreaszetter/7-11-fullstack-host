@@ -1,5 +1,8 @@
 import express from "express";
-const router = express.Router();
+import deviceAccessMiddleware from "../../controllers/middleware/deviceAccessMiddleware.js";
+import verifyJWT from "../../controllers/middleware/verifyJWT.js";
+
+const router = express.Router({ mergeParams: true });
 
 router.get("/", async (req, res, next) => {
   try {
@@ -10,7 +13,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id/latest-data", async (req, res, next) => {
+router.get("/:id/latest-data", verifyJWT, deviceAccessMiddleware, async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -40,7 +43,7 @@ router.get("/:id/latest-data", async (req, res, next) => {
 });
 
 //Get latest 50 sensor values
-router.get("/:id/trend", async (req, res, next) => {
+router.get("/:id/trend", verifyJWT, deviceAccessMiddleware, async (req, res, next) => {
   const { id } = req.params;
 
   try {

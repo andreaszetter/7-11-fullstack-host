@@ -1,6 +1,4 @@
 import jwt from "jsonwebtoken";
-// import dotenv from "dotenv";
-// dotenv.config();
 
 // Middleware for verifying JWT token
 function verifyJWT(req, res, next) {
@@ -12,7 +10,7 @@ function verifyJWT(req, res, next) {
 
     const token = authHeader.split(" ")[1];
 
-    jwt.verify(token, process.env.JWT_SECRET || "yoheybro", (error, payload) => {
+    jwt.verify(token, process.env.JWT_SECRET, (error, payload) => {
         // If verification failed
         if (error) {
             return res
@@ -20,8 +18,9 @@ function verifyJWT(req, res, next) {
                 .json({ error: "JWT-token is invalid or has expired." });
         }
 
-        // Om verifieringen gick bra(inget err) så får vi tillbaka en payload, och vi sparar den i req objectet.
+        //If verification went well(no error) we get back a payload and save it in the req object.
         req.user = payload;
+        console.log(payload);
 
         next();
     });

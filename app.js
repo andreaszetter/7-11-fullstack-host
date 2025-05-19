@@ -3,8 +3,6 @@ import loggerMiddleware from "./controllers/middleware/logger.js"
 import errorHandler from "./controllers/middleware/errorHandler.js";
 import pool from "./models/db.js";
 import jwt from "jsonwebtoken";
-// import authorizeDeviceAccess from "./controllers/middleware/deviceAccessMiddleware.js";
-import verifyJWT from "./controllers/middleware/verifyJWT.js";
 
 import dotenv from "dotenv";
 dotenv.config();

@@ -1,5 +1,4 @@
 import express from "express";
-import verifyJWT from "../controllers/middleware/verifyJWT.js";
 import pool from "../models/db.js";
 import jwt from "jsonwebtoken";
 
@@ -30,8 +29,6 @@ app.use((req, res, next) => {
 app.use("/api/users", usersRoute);
 app.use("/error", testErrorRoute)
 
-//Using verifyJWT globally to protect all routes ;)
-app.use(verifyJWT);
 
 app.get("/", (req, res) => {
   res.status(200).send("Hello, World!");

@@ -20,7 +20,6 @@ function verifyJWT(req, res, next) {
 
         //If verification went well(no error) we get back a payload and save it in the req object.
         req.user = payload;
-        console.log(payload);
 
         next();
     });

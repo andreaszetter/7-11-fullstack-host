@@ -1,15 +1,14 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import deviceAccessMiddleware from "../../controllers/middleware/deviceAccessMiddleware.js";
 import verifyJWT from "../../controllers/middleware/verifyJWT.js";
 const router = express.Router();
 
-router.get("/userinfo", verifyJWT, deviceAccessMiddleware, async (req, res, next) => {
+router.get("/userinfo", verifyJWT,  async (req, res, next) => {
   const user = req.user;
 
   try {
-    const result = await req.pool.query("SELECT firstname, email, role, phonenumber, company.company_name FROM users JOIN company ON users.company_id = company.id WHERE email = $1 ", [user.email]);
+    const result = await req.pool.query("SELECT firstname, surname, email, phonenumber, company.company_name, role FROM users JOIN company ON users.company_id = company.id WHERE email = $1 ", [user.email]);
     res.status(200).json(result.rows);
   } catch (err) {
     next(err);
